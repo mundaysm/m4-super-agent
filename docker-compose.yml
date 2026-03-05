@@ -3,16 +3,11 @@ services:
     image: ghcr.io/openclaw/openclaw:latest
     container_name: openclaw
     ports:
-      - "8000:8000"
+      - "8000:18789" # แมปพอร์ตที่ Gateway ใช้งานจริงออกมาที่ 8000
     environment:
       - OLLAMA_BASE_URL=http://host.docker.internal:11434
-      # --- เพิ่มบรรทัดนี้ลงไป ---
-      - NODE_OPTIONS=--max-old-space-size=2048
+      - NODE_OPTIONS=--max-old-space-size=4096
+      - HOST=0.0.0.0 # บังคับให้ฟังทุก IP
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    # เอา limits ออกก่อน หรือเพิ่มเป็นสัก 4G เพื่อให้หายใจออก
-    deploy:
-      resources:
-        limits:
-          memory: 4G 
     restart: unless-stopped
