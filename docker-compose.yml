@@ -4,8 +4,12 @@ services:
     container_name: openclaw
     ports:
       - "8000:18789"
-    # ใช้ entrypoint เพื่อบังคับ Parameter ให้ตัวแอปโดยตรง
-    entrypoint: ["node", "dist/gateway/index.js", "--host", "0.0.0.0", "--gateway.auth.token", "mysecrettoken123"]
+    environment:
+      # ใช้ชื่อตัวแปรให้ตรงกับที่แอปต้องการ (OpenClaw มักจะใช้รูปแบบนี้)
+      - OPENCLAW_GATEWAY_HOST=0.0.0.0
+      - OPENCLAW_GATEWAY_AUTH_TOKEN=mysecrettoken123
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      - NODE_OPTIONS=--max-old-space-size=4096
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: unless-stopped
