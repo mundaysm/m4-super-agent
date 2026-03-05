@@ -7,10 +7,9 @@ services:
     environment:
       - OLLAMA_BASE_URL=http://host.docker.internal:11434
       - NODE_OPTIONS=--max-old-space-size=4096
-    # --- เพิ่มบรรทัดด้านล่างนี้เข้าไป ---
-    command: >
-      --host 0.0.0.0 
-      --gateway.auth.token mysecrettoken123
+      # --- ใช้ชื่อ Env ให้ตรงตามที่แอปต้องการ ---
+      - OPENCLAW_HOST=0.0.0.0
+      - OPENCLAW_GATEWAY_AUTH_TOKEN=mysecrettoken123
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: unless-stopped
