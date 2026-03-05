@@ -6,10 +6,13 @@ services:
       - "8000:8000"
     environment:
       - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      # --- เพิ่มบรรทัดนี้ลงไป ---
+      - NODE_OPTIONS=--max-old-space-size=2048
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    # เอา limits ออกก่อน หรือเพิ่มเป็นสัก 4G เพื่อให้หายใจออก
     deploy:
       resources:
         limits:
-          memory: 1G
+          memory: 4G 
     restart: unless-stopped
