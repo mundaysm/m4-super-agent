@@ -3,7 +3,7 @@ services:
     image: ghcr.io/openclaw/openclaw:latest
     container_name: openclaw
     ports:
-      - "8000:18789"
+      - "18789:18789"  # แมปเลขเดียวกันออกมาเลย
     environment:
       # ใช้ชื่อตัวแปรให้ตรงกับที่แอปต้องการ (OpenClaw มักจะใช้รูปแบบนี้)
       - OPENCLAW_GATEWAY_HOST=0.0.0.0
