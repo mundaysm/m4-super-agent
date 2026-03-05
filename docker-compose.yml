@@ -3,11 +3,12 @@ services:
     image: ghcr.io/openclaw/openclaw:latest
     container_name: openclaw
     ports:
-      - "18789:18789"  # แมปเลขเดียวกันออกมาเลย
+      - "8000:18789"
+    volumes:
+      # ยัดไฟล์ config ของเราเข้าไปทับ (ลองจุดที่น่าจะเป็นไปได้ที่สุด)
+      - ./config.toml:/app/config.toml
+      - ./config.toml:/home/node/.openclaw/config.toml
     environment:
-      # ใช้ชื่อตัวแปรให้ตรงกับที่แอปต้องการ (OpenClaw มักจะใช้รูปแบบนี้)
-      - OPENCLAW_GATEWAY_HOST=0.0.0.0
-      - OPENCLAW_GATEWAY_AUTH_TOKEN=mysecrettoken123
       - OLLAMA_BASE_URL=http://host.docker.internal:11434
       - NODE_OPTIONS=--max-old-space-size=4096
     extra_hosts:
