@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.3.9",
+    "lastTouchedAt": "2026-03-13T05:06:30.655Z"
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "ollama-m4": {
+        "baseUrl": "http://host.docker.internal:11434/v1",
+        "apiKey": "ollama",
+        "api": "ollama",
+        "models": [
+          {
+            "id": "deepseek-r1:8b",
+            "name": "DeepSeek R1 8B",
+            "reasoning": true,
+            "contextWindow": 16000
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "ollama-m4/deepseek-r1:8b"
+      }
+    },
+    "list": [
+      {
+        "id": "main",
+        "skills": [],
+        "tools": {
+          "deny": [
+            "read",
+            "write",
+            "edit",
+            "apply_patch",
+            "exec",
+            "process",
+            "web_search",
+            "web_fetch",
+            "memory_search",
+            "memory_get",
+            "sessions_list",
+            "sessions_history",
+            "sessions_send",
+            "sessions_spawn",
+            "subagents",
+            "session_status",
+            "browser",
+            "canvas",
+            "message",
+            "cron",
+            "gateway",
+            "nodes",
+            "agents_list",
+            "image",
+            "tts"
+          ]
+        }
+      }
+    ]
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "gateway": {
+    "mode": "local",
+    "controlUi": {
+      "dangerouslyAllowHostHeaderOriginFallback": true,
+      "allowInsecureAuth": true
+    },
+    "auth": {
+      "mode": "token",
+      "token": "admin-super-key-2026"
+    }
+  }
+}

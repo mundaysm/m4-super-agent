@@ -1,6 +1,0 @@
-[gateway]
-host = "0.0.0.0"
-auth.token = "mysecret123"
-
-[canvas]
-host = "0.0.0.0"

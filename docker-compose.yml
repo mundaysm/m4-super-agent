@@ -1,14 +1,16 @@
 services:
   openclaw:
-    image: ghcr.io/openclaw/openclaw:latest
-    container_name: openclaw
-    # --- เพิ่ม 2 บรรทัดนี้ ---
-    user: root
-    network_mode: "host"
-    # ----------------------
-    environment:
-      - OLLAMA_BASE_URL=http://127.0.0.1:11434
-      - NODE_OPTIONS=--max-old-space-size=4096
-      - OPENCLAW_GATEWAY_AUTH_TOKEN=mysecret123
-    # เอา volumes ออกไปก่อนครับ เพื่อให้มันสร้างไฟล์เองได้ตามปกติ
+    image: ghcr.io/openclaw/openclaw:main-slim
+    container_name: openclaw-ai
     restart: unless-stopped
+    ports:
+      - "18789:18789"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./config:/home/node/.openclaw
+    environment:
+      - OPENCLAW_GATEWAY_CONTROL_UI_ALLOW_INSECURE_AUTH=true
+      - OPENCLAW_GATEWAY_CONTROL_UI_REQUIRE_DEVICE_IDENTITY=false
+      - OPENCLAW_GATEWAY_TRUST_PROXY=true
+    command: openclaw gateway --port 18789 --bind lan
